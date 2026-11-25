@@ -1,16 +1,17 @@
-## Hi there 👋
+# LarkOS website
 
-<!--
-**lark-os/lark-os** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+The site at https://lark-tracker.github.io/lark-os/ for LarkOS, free community
+firmware for the Polyend Tracker Mini. LarkOS is an independent project, not
+affiliated with or endorsed by Polyend.
 
-Here are some ideas to get you started:
+## Editing
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Everything on the page is in `index.html`; the comment at its top says where
+each part is. The scripts in `js/` run the boot animation, the chord palette
+and the JV-880 card builder. GitHub Pages publishes the `main` branch as it
+is, so a change is live a minute or so after it is committed.
+
+## Fonts
+
+Pixelify Sans and Lexend, self-hosted in `fonts/` under the SIL Open Font
+Licence (`fonts/OFL-*.txt`).
