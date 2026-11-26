@@ -14,6 +14,7 @@
     js/site.js       the chord palette and the Rack card builder's buttons
     js/rackconv.js   the JV-880 converter: a port of rack_convert.py and
                      rack_larkos.py, checked against them byte for byte
+    audio/           the sound examples, MP3; audio/README.md says how they were made
     fonts/           Pixelify Sans and Lexend, under the SIL Open Font Licence
     og.png           the picture shown when the link is shared
 -->
@@ -33,7 +34,7 @@
 <style>
 /* VOICE    a musician's field guide: plain, exact, proud of the details, honest about what is untested.
    IDEA     the Tracker Mini's boot screen at night, carried on down the page: the lark's sky, its block letters, its dotted loading line.
-   PICTURE  the live boot animation first; then three working screens: the chord palette, the Master FX page, the ROM converter.
+   PICTURE  the live boot animation first; then two working screens, the chord palette and the ROM converter; and the instruments and effects heard.
    COLOUR+TYPE night #12142B to every edge in both themes; cream faces, indigo block shadows, pink for what you press, cyan for what is live.
             Pixelify Sans headings with the letters' hard indigo shadow; Lexend, light, to read by.
    LAYOUT   one column to 1120px, bands opened by the dotted line; screens carry the pixel shadow; everything stacks under 600px. */
@@ -309,7 +310,7 @@ p {
   padding: 8px 14px;
 }
 
-/* screens: the three working things */
+/* screens: the working things */
 .screen {
   background: var(--panel);
   border: 3px solid var(--dot);
@@ -471,57 +472,6 @@ p {
   margin-bottom: 0;
 }
 
-/* master fx page */
-.fx {
-  display: grid;
-  grid-template-columns: repeat(8,minmax(0,1fr));
-  gap: 10px;
-  align-items: end;
-}
-.fx div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-align: center;
-}
-.fx .col {
-  width: 100%;
-  max-width: 46px;
-  height: 150px;
-  background: linear-gradient(0deg,var(--dot) 3px,transparent 0) 0 0/100% 7px;
-  position: relative;
-}
-.fx .col i {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: var(--v);
-  background: var(--cyan);
-}
-.fx .col i::before {
-  content: "";
-  position: absolute;
-  left: -4px;
-  right: -4px;
-  top: -3px;
-  height: 6px;
-  background: var(--face);
-}
-.fx b {
-  font: 600 15px var(--px);
-  color: var(--face);
-}
-.fx span {
-  font-size: 13px;
-  color: var(--muted);
-}
-.fx .blank .col {
-  background: none;
-  border: 2px dashed var(--dot);
-}
-
 /* instruments */
 .x0x {
   margin: 28px 0 48px;
@@ -548,6 +498,100 @@ p {
 }
 .browser p {
   margin: 0;
+}
+
+/* sound examples: one press plays, the next stops. Without script they are
+   plain links to the MP3s in audio/. */
+.clips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.clip {
+  --p: 0%;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 7px 12px 7px 11px;
+  font: 600 16px var(--px);
+  color: var(--face);
+  text-decoration: none;
+  border: 2px solid var(--dot);
+  background: linear-gradient(90deg,rgba(111,227,225,.2) var(--p),transparent 0) var(--bg);
+}
+.clip::before {
+  content: "";
+  flex: none;
+  width: 0;
+  height: 0;
+  border-left: 9px solid var(--pink);
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.clip span {
+  font: 300 14px var(--tx);
+  color: var(--muted);
+}
+.clip:hover {
+  color: var(--face);
+  border-color: var(--pink);
+}
+.clip[aria-pressed=true] {
+  border-color: var(--cyan);
+}
+.clip[aria-pressed=true]::before {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  background: var(--cyan);
+}
+.demo {
+  margin: 22px 0 0;
+}
+.clip.wide {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding-bottom: 24px;
+  background: var(--bg);
+}
+/* the wide ones carry a timeline: the fill is how far it has played, the
+   tick where the effect comes in (--in, set on the figure) */
+.clip.wide i {
+  position: absolute;
+  left: 11px;
+  right: 11px;
+  bottom: 10px;
+  height: 4px;
+  background: var(--dot);
+}
+.clip.wide i::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--p);
+  background: var(--cyan);
+}
+.clip.wide i::after {
+  content: "";
+  position: absolute;
+  left: var(--in);
+  top: -5px;
+  width: 3px;
+  height: 14px;
+  background: var(--pink);
+}
+.cols + p {
+  margin-top: 28px;
+}
+.demo figcaption {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--muted);
 }
 .browser .n {
   text-align: right;
@@ -788,7 +832,7 @@ footer b {
   .browser h3 {
     grid-area: a;
   }
-  .browser p {
+  .browser li > div {
     grid-area: b;
   }
   .browser .n {
@@ -796,16 +840,6 @@ footer b {
   }
   .buttons {
     grid-template-columns: repeat(4,minmax(0,1fr));
-  }
-  .fx {
-    grid-template-columns: repeat(3,minmax(0,1fr));
-    row-gap: 18px;
-  }
-  .fx .blank {
-    display: none;
-  }
-  .fx .col {
-    height: 110px;
   }
   .screen {
     padding: 14px;
@@ -901,33 +935,28 @@ footer b {
 <section class="band" id="effects">
   <div class="wrap">
     <h2>A granular send and a tape machine</h2>
-    <p class="intro">Two master-bus effects the stock firmware has no room for. Both are off until you use them: a project that never touches them sounds exactly as it did.</p>
+    <p class="intro">Two master-bus effects the stock firmware has no room for. Both are off until you use them: a project that never touches them sounds exactly as it did. The examples below are the firmware's own Beads and Cassette code, run on a computer.</p>
     <div class="cols">
       <div>
         <h3>Beads</h3>
         <p>Beads chops what you feed it into grains and scatters them. It sits beside the delay and the reverb as a fourth send, so the drums can have a tail while the bass stays dry. Raise a track's Beads send, or write step FX Z to set it from that step on.</p>
         <p>Time, Size, Shape and Pitch each have a random spread; then come Density, Feedback, Reverb, a choice of four Media, and the Send volume. Freeze stops writing to the buffer: mute everything underneath and the cloud carries on alone. The audio input goes through it too, which makes the Mini a granular pedal with a freeze switch. Beads renders as its own stem.</p>
+        <figure class="demo" style="--in:35.2%">
+          <a class="clip wide" href="audio/fx-beads.mp3">Beads <span>two bars dry, then the send goes up</span><i aria-hidden="true"></i></a>
+          <figcaption>June's Electric Key on its own for two bars. At the pink tick the track's Beads send goes to 100, and when the keys stop the grains carry on. Size 70, Density 85, Feedback 50 and Reverb 50; the rest at their defaults.</figcaption>
+        </figure>
       </div>
       <div>
         <h3>Cassette</h3>
         <p>A tape machine between the mix and the limiter, so everything goes through it: all eight tracks, the sends and the input. It is an insert, not a send, because wow and flutter bend pitch, and a bent copy beside an unbent one is a flanger, not a tape deck.</p>
         <p>Drive, Wow, Flutter, Low cut, High cut, Hiss, Dropout and Wet. Off is bit-identical to having no Cassette at all. Step FX W sets the wet mix and holds until something changes it, so a breakdown can fall onto tape and the chorus come back off it.</p>
+        <figure class="demo" style="--in:46.1%">
+          <a class="clip wide" href="audio/fx-cassette.mp3">Cassette <span>two bars clean, then onto tape</span><i aria-hidden="true"></i></a>
+          <figcaption>The same two bars with x0x's 808 kit under them. At the pink tick Cassette comes on at its defaults: Drive, Wow and Flutter 30, Low cut 20, High cut 40, Hiss 15, Dropout 20.</figcaption>
+        </figure>
       </div>
     </div>
 
-    <div class="screen" aria-labelledby="fx-title">
-      <div class="bar"><span id="fx-title">Master FX 4/4</span><span class="mut">Drawn for this page, at the defaults</span></div>
-      <div class="fx">
-        <div><span class="col"><i style="--v:100%"></i></span><b>Tape Mix</b><span>100</span></div>
-        <div><span class="col"><i style="--v:30%"></i></span><b>Drive</b><span>30</span></div>
-        <div><span class="col"><i style="--v:30%"></i></span><b>Wow</b><span>30</span></div>
-        <div><span class="col"><i style="--v:30%"></i></span><b>Flutr</b><span>30</span></div>
-        <div><span class="col"><i style="--v:100%"></i></span><b>Beads Send</b><span>100</span></div>
-        <div><span class="col"><i style="--v:75%"></i></span><b>Beads Dens</b><span>75</span></div>
-        <div class="blank" aria-hidden="true"><span class="col"></span><b>&nbsp;</b><span>&nbsp;</span></div>
-        <div class="blank" aria-hidden="true"><span class="col"></span><b>&nbsp;</b><span>&nbsp;</span></div>
-      </div>
-    </div>
     <p>The six controls you want while something is playing are on a fourth master page: keep pressing the master screen button, past the mixer and the reverb, to Master FX 4/4. Each bar writes straight into the project as you move it. Nothing was moved to make room; the three stock pages are untouched. Beads and Cassette settings are saved with each project.</p>
   </div>
 </section>
@@ -935,7 +964,7 @@ footer b {
 <section class="band" id="instruments">
   <div class="wrap">
     <h2>Eight new instruments</h2>
-    <p class="intro">Each is a plugin in <code>/System/Synths</code> and shows up in an instrument's Model list. All but Plaits hold their whole chord inside one voice slot, so a pad costs one slot, not six.</p>
+    <p class="intro">Each is a plugin in <code>/System/Synths</code> and shows up in an instrument's Model list. All but Plaits hold their whole chord inside one voice slot, so a pad costs one slot, not six. The examples under each are the plugin's own code, rendered on a computer rather than recorded from a Tracker; the four synths play the same pad, lead, bass and keys phrases, so you can compare them.</p>
 
     <div class="x0x">
       <div>
@@ -948,13 +977,95 @@ footer b {
     </div>
 
     <ul class="browser">
-      <li><h3>Soli</h3><p>A string machine: twelve top-octave oscillators divided down, a three-phase ensemble across the lot, and the solo voices such machines carried. Paraphonic, like the real ones, so octaves lock.</p><span class="n">51 presets</span></li>
-      <li><h3>June</h3><p>A six-voice polysynth of the early eighties: one oscillator with saw, pulse, sub and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p><span class="n">52 presets</span></li>
-      <li><h3>Hexa</h3><p>A six-voice wavetable polysynth recorded to tape. Each of its two oscillators reads a table of its own, from eighteen that ship, and two LFOs move through them, together or apart. Then the tape: drift, wow and flutter, dropouts, an echo and a hiss floor, with Age over all of it.</p><span class="n">28 presets</span></li>
-      <li><h3>Ham</h3><p>A tonewheel organ: 91 wheels always turning, nine drawbars by footage, single-trigger percussion, scanner vibrato, key click and a preamp. The rotary speaker goes between Brake, Chorale and Tremolo, and each speed can follow the tempo.</p><span class="n">23 presets</span></li>
-      <li><h3>Rack</h3><p>A four-tone sample player in the manner of a nineties rack module, with filter and amp envelopes on every tone and two LFOs. Its sounds come from your own JV-880's ROMs.</p><span class="n">200 patches</span></li>
-      <li><h3>Plaits</h3><p>Mutable Instruments' Plaits: 24 synthesis engines, eight voices. Its six-operator FM engines read DX7 cartridge banks off the card, four banks of 32, and its wavetable engine takes up to 15 of your own single-cycle waves.</p><span class="n">24 engines</span></li>
-      <li><h3>Rings</h3><p>Mutable Instruments' Rings resonator, with six models: Modal, Sympathetic, String, FM Voice, Quantized and String+Verb. Four voices of its own inside one slot, stereo out, and a note-off lets it ring: resonators decay, they are not cut.</p><span class="n">6 models</span></li>
+      <li>
+        <h3>Soli</h3>
+        <div>
+          <p>A string machine: twelve top-octave oscillators divided down, a three-phase ensemble across the lot, and the solo voices such machines carried. Paraphonic, like the real ones, so octaves lock.</p>
+          <div class="clips">
+            <a class="clip" href="audio/soli-pad.mp3">Pad <span>Solina</span></a>
+            <a class="clip" href="audio/soli-lead.mp3">Lead <span>Violin</span></a>
+            <a class="clip" href="audio/soli-bass.mp3">Bass <span>Synth Bass</span></a>
+            <a class="clip" href="audio/soli-keys.mp3">Keys <span>String Piano</span></a>
+          </div>
+        </div>
+        <span class="n">51 presets</span>
+      </li>
+      <li>
+        <h3>June</h3>
+        <div>
+          <p>A six-voice polysynth of the early eighties: one oscillator with saw, pulse, sub and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p>
+          <div class="clips">
+            <a class="clip" href="audio/june-pad.mp3">Pad <span>Strings</span></a>
+            <a class="clip" href="audio/june-lead.mp3">Lead <span>Saw Lead</span></a>
+            <a class="clip" href="audio/june-bass.mp3">Bass <span>106 Bass</span></a>
+            <a class="clip" href="audio/june-keys.mp3">Keys <span>Electric Key</span></a>
+          </div>
+        </div>
+        <span class="n">52 presets</span>
+      </li>
+      <li>
+        <h3>Hexa</h3>
+        <div>
+          <p>A six-voice wavetable polysynth recorded to tape. Each of its two oscillators reads a table of its own, from eighteen that ship, and two LFOs move through them, together or apart. Then the tape: drift, wow and flutter, dropouts, an echo and a hiss floor, with Age over all of it.</p>
+          <div class="clips">
+            <a class="clip" href="audio/hexa-pad.mp3">Pad <span>Two Rooms</span></a>
+            <a class="clip" href="audio/hexa-lead.mp3">Lead <span>Sync Runner</span></a>
+            <a class="clip" href="audio/hexa-bass.mp3">Bass <span>Reso Acid</span></a>
+            <a class="clip" href="audio/hexa-keys.mp3">Keys <span>Tine Bloom</span></a>
+          </div>
+        </div>
+        <span class="n">28 presets</span>
+      </li>
+      <li>
+        <h3>Ham</h3>
+        <div>
+          <p>A tonewheel organ: 91 wheels always turning, nine drawbars by footage, single-trigger percussion, scanner vibrato, key click and a preamp. The rotary speaker goes between Brake, Chorale and Tremolo, and each speed can follow the tempo.</p>
+          <div class="clips">
+            <a class="clip" href="audio/ham-pad.mp3">Pad <span>Aeolian</span></a>
+            <a class="clip" href="audio/ham-lead.mp3">Lead <span>Krummhorn</span></a>
+            <a class="clip" href="audio/ham-bass.mp3">Bass <span>Walking Bass</span></a>
+            <a class="clip" href="audio/ham-keys.mp3">Keys <span>Jazz Trio</span></a>
+          </div>
+        </div>
+        <span class="n">23 presets</span>
+      </li>
+      <li>
+        <h3>Rack</h3>
+        <div>
+          <p>A four-tone sample player in the manner of a nineties rack module, with filter and amp envelopes on every tone and two LFOs. Its sounds come from your own JV-880's ROMs.</p>
+        </div>
+        <span class="n">200 patches</span>
+      </li>
+      <li>
+        <h3>Plaits</h3>
+        <div>
+          <p>Mutable Instruments' Plaits: 24 synthesis engines, eight voices. Its six-operator FM engines read DX7 cartridge banks off the card, four banks of 32, and its wavetable engine takes up to 15 of your own single-cycle waves.</p>
+          <div class="clips">
+            <a class="clip" href="audio/plaits-va.mp3">Virt Analog</a>
+            <a class="clip" href="audio/plaits-fm.mp3">FM <span>2-op</span></a>
+            <a class="clip" href="audio/plaits-wavetable.mp3">Wavetable</a>
+            <a class="clip" href="audio/plaits-chord.mp3">Chord</a>
+            <a class="clip" href="audio/plaits-modal.mp3">Modal</a>
+            <a class="clip" href="audio/plaits-drums.mp3">Drums <span>Bass Drum, Snare Drum, Hi-Hat</span></a>
+          </div>
+        </div>
+        <span class="n">24 engines</span>
+      </li>
+      <li>
+        <h3>Rings</h3>
+        <div>
+          <p>Mutable Instruments' Rings resonator, with six models: Modal, Sympathetic, String, FM Voice, Quantized and String+Verb. Four voices of its own inside one slot, stereo out, and a note-off lets it ring: resonators decay, they are not cut.</p>
+          <div class="clips">
+            <a class="clip" href="audio/rings-modal.mp3">Modal</a>
+            <a class="clip" href="audio/rings-sympathetic.mp3">Sympathetic</a>
+            <a class="clip" href="audio/rings-string.mp3">String</a>
+            <a class="clip" href="audio/rings-fm-voice.mp3">FM Voice</a>
+            <a class="clip" href="audio/rings-quantized.mp3">Quantized</a>
+            <a class="clip" href="audio/rings-string-verb.mp3">String+Verb</a>
+          </div>
+        </div>
+        <span class="n">6 models</span>
+      </li>
     </ul>
     <p class="also small">Also on the list, as in CE: CHIP, and Polyend's own six plugins (ACD, DIRT, FAT, PERC, VAP and WTFM), unmodified.</p>
   </div>

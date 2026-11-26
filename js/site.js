@@ -1,4 +1,4 @@
-// LarkOS site: the chord palette, and the Rack converter's controls.
+// LarkOS site: the chord palette, the Rack converter's controls and the sound examples.
 {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
@@ -202,5 +202,50 @@
     $('#rc-go').addEventListener('click', run);
     $('#rc-save').addEventListener('click', save);
     showFiles();
+  }
+
+  // ------------------------------------------------------- sound examples
+  // Every example on the page shares one audio element, so starting one
+  // stops whichever was playing. Without script each is a plain link to its
+  // MP3, which the browser plays on its own.
+  const clips = document.querySelectorAll('a.clip');
+  if (clips.length) {
+    const audio = new Audio();
+    audio.preload = 'none';
+    let cur = null, raf = 0;
+
+    const show = () => {
+      if (cur && audio.duration) cur.style.setProperty('--p', (100 * audio.currentTime / audio.duration).toFixed(2) + '%');
+      raf = cur ? requestAnimationFrame(show) : 0;
+    };
+    const stop = () => {
+      if (!cur) return;
+      cur.setAttribute('aria-pressed', 'false');
+      cur.style.setProperty('--p', '0%');
+      cur = null;
+      cancelAnimationFrame(raf);
+    };
+    const toggle = (a) => {
+      const again = cur === a;
+      audio.pause();
+      stop();
+      if (again) return;
+      cur = a;
+      a.setAttribute('aria-pressed', 'true');
+      audio.src = a.href;
+      audio.play().then(show, () => stop());
+    };
+
+    clips.forEach((a) => {
+      const where = a.closest('li, figure');
+      const who = where && where.querySelector('h3') ? where.querySelector('h3').textContent + ' ' : '';
+      a.setAttribute('role', 'button');
+      a.setAttribute('aria-pressed', 'false');
+      a.setAttribute('aria-label', 'Play ' + who + a.textContent.replace(/\s+/g, ' ').trim());
+      a.addEventListener('click', (e) => { e.preventDefault(); toggle(a); });
+      a.addEventListener('keydown', (e) => { if (e.key === ' ') { e.preventDefault(); toggle(a); } });
+    });
+    audio.addEventListener('ended', stop);
+    audio.addEventListener('error', stop);
   }
 }
