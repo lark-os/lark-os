@@ -880,8 +880,11 @@ footer b {
     <canvas id="boot" width="800" height="480" role="img" aria-label="The LarkOS boot animation: a pixel lark takes off from the end of the loading wave, flies over the word LarkOS, lands on the L and sings while the wave fills."></canvas>
     <button id="replay" class="ghost" type="button" hidden>Play it again</button>
   </div>
-  <p class="cap">What a Tracker Mini running LarkOS shows while a project opens. This is the firmware's own timing, drawn in your browser.</p>
-  <p class="lead">LarkOS is free community firmware for the Polyend Tracker Mini. It puts your project's key under every note, adds a granular send and a tape machine to the master bus, and brings eight new instruments, from a string machine to a synthesised 808 and 909.</p>
+  <p class="lead">LarkOS is free community firmware for the Polyend Tracker Mini. It puts your project's key under every note, adds a live granular send that listens to the input and a tape machine to the master bus. It brings eight exciting new instruments including a weird and wonderful dual wavetable synth, a classic rompler player, a faithfully-recreated tonewheel organ, and fully synthesized 808 and 909 kits.
+  <br> 
+  <br>
+  **It is currently in closed beta testing and is scheduled to be released mid-December. <a href="https://www.youtube.com/@lark-tracker">A YouTube video introduction to follow in the coming week or two.</a>**
+  </p>
   <div class="ctas"><a class="btn" href="#install">Install LarkOS</a><a class="btn alt" href="#rack">Convert your JV-880 ROMs</a></div>
 </section>
 
@@ -889,7 +892,7 @@ footer b {
   <div class="wrap">
     <h2>Stock, plus</h2>
     <div class="cols">
-      <p class="intro">LarkOS is a fork of Polyend Tracker Community Edition. Nothing stock was taken out, and every new setting starts where the Tracker already was. If you never press a harmony button and never switch on an effect, it behaves like CE, apart from MIDI notes landing in the project's key, which is the thing that started all of this.</p>
+      <p class="intro">LarkOS is a fork of Polyend Tracker Community Edition and built specifically for the Tracker Mini. Nothing stock was taken out, and every new setting starts where the Tracker already was. If you never press a harmony button and never switch on an effect, it behaves like CE, apart from MIDI notes landing in the project's key, which is the thing that started all of this.</p>
       <p>Stock CE opens LarkOS projects: LarkOS adds no fields to the project format, and Beads and Cassette settings live in a small file beside the project, which CE simply ignores. Chords are the exception. Stock firmware's chord table is shorter, so chords that use LarkOS's richer entries won't play as written there. Going back to stock is the same firmware update as coming here, with nothing to undo first.</p>
     </div>
   </div>
@@ -898,81 +901,79 @@ footer b {
 <section class="band" id="harmony">
   <div class="wrap">
     <h2>The key is under everything</h2>
-    <p class="intro">Set the scale and root note in Config › Project Settings and every harmony button follows them. The buttons live in the pattern editor, on the pages behind More, and none of them opens a menu.</p>
+    <p class="intro">Set the scale and root note in Config › Project Settings and every note changes diatonically. Every harmony function follows, which live in the pattern editor on the pages behind More, and none of them opens a menu.</p>
 
     <div class="screen" id="palette">
       <div class="bar"><span id="pal-title" aria-live="polite">Chords</span><span class="keysel" role="group" aria-label="Key"><button type="button" data-key="0" aria-pressed="true">C major</button><button type="button" data-key="1" aria-pressed="false">A minor</button></span></div>
       <div class="keys" aria-hidden="true"></div>
-      <p id="pal-colour" class="colour">Press a chord. Press it again for its next colour.</p>
+      <p id="pal-colour" class="colour">Press a chord. Press it again for its next color.</p>
       <div class="buttons" role="group" aria-label="The key's seven chords"></div>
-      <div class="foot"><button type="button" id="pal-hear" aria-pressed="false">Hear: off</button><span>The chords, colours and voicings come from LarkOS's harmony code, run on a computer for these two keys. The pink key is the bass note. The sound is a plain browser tone, not a Tracker instrument.</span></div>
+      <div class="foot"><button type="button" id="pal-hear" aria-pressed="false">Hear: off</button><span>The chords, colors and voicings come from LarkOS's harmony code, run on a computer for these two keys. The pink key is the bass note. The sound is a plain browser tone, not a Tracker instrument.</span></div>
     </div>
 
     <div class="stored">
       <h3>A chord is one step on one track</h3>
-      <p>A chord isn't spread across tracks: it lives as FX data on a single step. The note column holds the chord's lowest note, and the chord FX beside it holds a number that picks an entry from the firmware's chord table. Each entry is the list of notes to sound above that lowest note, so inversions and voicings are simply different entries, such as "root 5 above the bass".</p>
+      <p>A chord lives as FX data on a single step, not spread across tracks. The note column holds the chord's lowest note, and the chord FX beside it holds a number that picks an entry from the firmware's chord table. Each entry is the list of notes to sound above that lowest note, so inversions and voicings are simply different entries, such as "root 5 above the bass".</p>
       <p>When the pattern plays:</p>
       <ul>
         <li>On a synth or MIDI instrument, that one track plays the whole chord.</li>
         <li>On a sample instrument, which has only one voice per track, LarkOS borrows the voices of idle tracks while it plays. Those tracks' steps stay empty in the pattern, and nothing is written to them.</li>
       </ul>
       <p>The only exception is playing chords in from a MIDI keyboard with several tracks selected, which puts one note on each track, as stock always has. With just one step selected, it writes the chord-FX step instead.</p>
-      <p class="small">Stock firmware has a chord FX too, but its table stops at entry 67: triads, sevenths and their inversions. The 9ths, 11ths, 13ths, add9 and 6/9 chords and the shell and open voicings are LarkOS's entries 68 to 134, so a project that uses them won't play as written on stock firmware.</p>
+      <p class="small">Note: Stock firmware has a chord FX too, but its table stops at entry 67: triads, sevenths and their inversions. The 9ths, 11ths, 13ths, add9 and 6/9 chords and the shell and open voicings are LarkOS's entries 68 to 134, so a project that uses them won't play as written on stock firmware.</p>
     </div>
 
     <div class="cols">
-      <div><h3>Notes that stay in the key</h3><p>Where this all started: with a scale chosen, +1 and −1 move a note along the scale: in C major, C goes to D, E and F, never C#. A chord moves to the chord on the next degree, and +10 and −10 are still an octave. Notes from a MIDI keyboard land in the key too. A Chromatic project, a track set to Drums, and empty steps work exactly as stock.</p></div>
-      <div><h3>Seven chords on seven buttons</h3><p>The Chords page holds the key's seven chords, each showing its numeral and its name. Press one and it is written at the cursor; press it again for its next colour: Dm7, Dm9, Dm11, Dm13, Dm. A colour is fitted to the degree it lands on, so on iii, where a ninth would leave the key, Em7 goes straight on to its eleventh.</p></div>
-      <div><h3>Colours and voicings on the value keys</h3><p>Put the cursor on a chord's FX value in edit mode. +1 and −1 walk its colours, up through add9, 6, 6/9, 7th, 9th, 11th and 13th and down to the triad and the suspensions; +10 and −10 step through close, the inversions, shell and open. You hear each one, and the title bar names it: Chord: Dm9/F 1st inv.</p></div>
-      <div><h3>Double-tap Shift and LarkOS chooses</h3><p>It looks 32 steps either way along the track: at the chords before and after (what they share, how rich they are, whether this one resolves into the next, how far the hand moves) and at the single notes nearby, which the chord should contain and not rub against. Double-tap again for the runner-up, and again for a third. With a selection, it does every chord in it.</p></div>
-      <div><h3>Play chords in from a keyboard</h3><p>With one step selected, hold three or more keys on a MIDI keyboard. They are written as that one step: the lowest note, and the chord FX that sounds what you played, inversion included. Stock sounded the extra notes and wrote only the first. Two keys a fifth or a fourth apart count as a chord too.</p></div>
-      <div><h3>Chord tools</h3><p>Set swaps the seven buttons between the key's own chords, chords borrowed from the parallel key, and Function: five secondary dominants, the tritone substitute and the sharp-four diminished. Voicing chooses close, shell or open; Bass chooses the least movement, the root, third or fifth, or a pedal on the key note; Transp moves chords by scale step, so Dm7 up a step is Em7; Pin key gives one pattern a key of its own.</p></div>
-      <div><h3>Chords on samples</h3><p>A sample track has one voice, but the instrument has eight. A chord on a sample instrument borrows voices from tracks with nothing to play, empty tracks first. With three tracks free a seventh chord is complete; with fewer it keeps the third and seventh and drops the fifth first. A lent voice goes back the moment its own track plays.</p></div>
+      <div><h3>Notes that stay in the key</h3><p>Where this all started: with a scale chosen, +1 and −1 move a note along the scale. In C major, C goes to D, E and F, never C#. A chord moves to the chord on the next degree, and +10 and −10 are still an octave. Notes from a MIDI keyboard (including the KB-1!) snap to the key. A Chromatic project, a track set to Drums, and empty steps work exactly as stock.</p></div>
+      <div><h3>Seven chords on seven buttons</h3><p>The Chords page holds the key's seven chords, each showing its numeral and its name. Press one and it is written at the cursor, press it again for its next color: Dm7, Dm9, Dm11, Dm13, Dm. A color is fitted to the degree it lands on, so on iii, where a ninth would leave the key, Em7 goes straight on to its eleventh.</p></div>
+      <div><h3>Colors and voicings on the value keys</h3><p>Put the cursor on a chord's FX value in edit mode. +1 and −1 walk its colors, up through add9, 6, 6/9, 7th, 9th, 11th and 13th and down to the triad and the suspensions. +10 and −10 step through close voicings, the inversions, shell and open voicings. You hear each one as a preview and the title bar names it: Chord: Dm9/F 1st inv.</p></div>
+      <div><h3>Double-press Shift and LarkOS chooses</h3><p>It looks 32 steps either way along the track: at the chords before and after (what they share, how rich they are, whether this one resolves into the next, how far the hand moves) and at the single notes nearby, which the chord should contain and not rub against. Double-press again for the runner-up, and again for a third. With a selection, it does every chord inside.</p></div>
+      <div><h3>Play chords in from a keyboard</h3><p>With one step selected, hold three or more keys on a MIDI keyboard. They are written as that one step, showing the lowest note while the chord FX registers what you played, inversion included. Stock CE sounded the extra notes but wrote only the first. Two keys a fourth or a fifth apart count as a chord too!</p></div>
+      <div><h3>Chord tools and per-pattern Key</h3><p>"Set" swaps the seven buttons between the key's own chords, chords borrowed from the parallel key. "Function" chooses between: five secondary dominants, the tritone substitute and the sharp-four diminished. "Voicing" chooses close, shell or open. "Bass" chooses the least movement, the root, third or fifth, or a pedal on the key note. "Transp" moves chords diatonically by scale step, so Dm7 up a step is Em7. "Pin Key" gives one pattern a key of its own, making things like modal interchange and pivots to parallel major/minor a breeze! </p></div>
+      <div><h3>Chords on samples</h3><p>A sample track has one voice, but the sample instrument has eight. A chord on a sample instrument borrows voices from tracks with nothing to play, empty tracks first. With three tracks free a seventh chord is complete, with fewer it keeps the third and seventh and drops the fifth first. A lent voice goes back the moment its own track plays.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band" id="effects">
   <div class="wrap">
-    <h2>A granular send and a tape machine</h2>
-    <p class="intro">Two master-bus effects the stock firmware has no room for. Both are off until you use them: a project that never touches them sounds exactly as it did. The examples below are the firmware's own Beads and Cassette code, run on a computer.</p>
+    <h2>Live granular processing and vintage tape machine</h2>
+    <p class="intro">Two new master-bus effects are off until you use them, a project that never touches them sounds exactly as it did. The examples below are the firmware's own Cassette code and its implementation of Émilie Gillet's amazing Beads granular module.</p>
     <div class="cols">
       <div>
         <h3>Beads</h3>
         <p>Beads chops what you feed it into grains and scatters them. It sits beside the delay and the reverb as a fourth send, so the drums can have a tail while the bass stays dry. Raise a track's Beads send, or write step FX Z to set it from that step on.</p>
-        <p>Time, Size, Shape and Pitch each have a random spread; then come Density, Feedback, Reverb, a choice of four Media, and the Send volume. Pitch moves in fourths, fifths and octaves, and its random spread sends each grain to one of them, never in between. Freeze stops writing to the buffer: mute everything underneath and the cloud carries on alone. The audio input goes through it too, which makes the Mini a granular pedal with a freeze switch. Beads renders as its own stem.</p>
+        <p>Time, Size, Shape and Pitch each have a random spread; then come Density, Feedback, Reverb, a choice of four Media, and the Send volume. Pitch moves in fourths, fifths and octaves, and its random spread sends each grain to one of them, never in between. Freeze stops writing to the buffer: mute everything underneath and the cloud carries on alone. The audio input goes through it too, which makes the Mini a granular pedal with a freeze switch! Beads also renders as its own stem into your DAW.</p>
         <figure class="demo" style="--in:32.8%">
           <a class="clip wide" href="audio/fx-beads.mp3">Beads <span>two bars dry, then the send goes up</span><i aria-hidden="true"></i></a>
-          <figcaption>Rings' Sympathetic model on its own for two bars, eighths over Cm9 and Abmaj9. At the pink tick the track's Beads send goes to 100 and the grains gather within a second; when the arpeggio stops, the strings and the cloud ring on into the fade. Size 85, Density 95, Feedback 60, Reverb 60, Time 35, and Pitch random 50 so the grains land on fourths, fifths and octaves; the rest at their defaults.</figcaption>
+          <figcaption>Rings' "Sympathetic" model on its own for two bars. At the pink tick, the track's Beads send goes to 100 and the grains gather within a second. When the arpeggio stops, the strings and the cloud ring on into the fade. Size 85, Density 95, Feedback 60, Reverb 60, Time 35, and Pitch random 50 so the grains land on fourths, fifths and octaves; the rest at their defaults.</figcaption>
         </figure>
       </div>
       <div>
         <h3>Cassette</h3>
-        <p>A tape machine between the mix and the limiter, so everything goes through it: all eight tracks, the sends and the input. It is an insert, not a send, because wow and flutter bend pitch, and a bent copy beside an unbent one is a flanger, not a tape deck.</p>
+        <p>A vintage tape machine between the mix and the limiter, so everything goes through it: all eight tracks, the sends and the input. It is an insert, not a send, because wow and flutter bend pitch and a bent copy beside an unbent one is a flanger, not a tape deck.</p>
         <p>Drive, Wow, Flutter, Low cut, High cut, Hiss, Dropout and Wet. Drive is matched in level, so turning it up thickens the sound rather than making it louder, and switching the tape in does not jump the volume. Off is bit-identical to having no Cassette at all. Step FX W sets the wet mix and holds until something changes it, so a breakdown can fall onto tape and the chorus come back off it.</p>
         <figure class="demo" style="--in:46.1%">
           <a class="clip wide" href="audio/fx-cassette.mp3">Cassette <span>two bars clean, then onto tape</span><i aria-hidden="true"></i></a>
-          <figcaption>Two bars of June's Electric Key over x0x's 808 kit. At the pink tick Cassette comes on at its defaults: Drive, Wow and Flutter 30, Low cut 20, High cut 40, Hiss 15, Dropout 20.</figcaption>
+          <figcaption>Two bars of June's "Electric Key" preset over x0x's 808 kit. At the pink tick Cassette comes on at its defaults: Drive, Wow and Flutter 30, Low cut 20, High cut 40, Hiss 15, Dropout 20.</figcaption>
         </figure>
       </div>
     </div>
-
-    <p>The six controls you want while something is playing are on a fourth master page: keep pressing the master screen button, past the mixer and the reverb, to Master FX 4/4. Each bar writes straight into the project as you move it. Nothing was moved to make room; the three stock pages are untouched. Beads and Cassette settings are saved with each project.</p>
   </div>
 </section>
 
 <section class="band" id="instruments">
   <div class="wrap">
-    <h2>Eight new instruments</h2>
-    <p class="intro">Each is a plugin in <code>/System/Synths</code> and shows up in an instrument's Model list. All but Plaits hold their whole chord inside one voice slot, so a pad costs one slot, not six. The examples under each are the plugin's own code, rendered on a computer rather than recorded from a Tracker; Soli, June and Hexa play the same pad, lead, bass and keys phrases, so you can compare them, and Ham plays what an organist would on four of its registrations.</p>
+    <h2>Eight new instruments and an actually usable randomizer</h2>
+    <p class="intro">Each is a plugin in <code>/System/Synths</code> and shows up in an instrument's Model list and each ships with dozens of presets. An intelligent randomizer tweaks parameters in seasonable ranges to produce usable sounds, not noisy garble ;)</p>
 
     <div class="x0x">
       <div>
         <h3>x0x: an 808 and a 909, synthesised</h3>
         <p>Eleven drums: kick, snare, clap, rim, closed and open hat, ride, cymbal and three toms. Each can be the 808's or the 909's, drum by drum, so a 909 kick can sit under an 808 snare.</p>
-        <p>Each drum is built the way its circuit builds it. The kick and toms are a sine whose pitch falls as it rings, with a click on the front; the snare is two ringing tones and filtered noise; the clap is band-passed noise struck several times; the metal is the 808's six square waves at fixed, unrelated pitches. A fitting tool played each model against a recording of the real drum on three spectrograms and kept every change that brought them closer. Only the numbers are kept.</p>
+        <p>Each drum is built the way its circuit builds it and a fitting tool played each model against a recording of the real drum on three spectrograms and kept every change that brought them closer.</p>
         <p>Twelve kits: 808, 909, 808 Long, 909 Tight, House, Electro, Deep, Toy, Soft, Lo-Fi, Crushed and Driven.</p>
-        <p>Per drum: Machine, Level, Pan, Tune, Attack, Decay, Tone and Snap. Across the kit: Grit, an overdrive run at twice the sample rate so what it adds stays in tune, plus Sample Rate, Bits and Accent. Keys follow the General MIDI drum map, or a row of eleven from any key you choose.</p>
+        <p>Per drum: Machine, Level, Pan, Tune, Attack, Decay, Tone and Snap. Across the kit: Grit, an overdrive run at twice the sample rate so what it adds stays in tune. Sample Rate and Bits reduction controls included to get crispy with it. Keys follow the General MIDI drum map, or a row of eleven from any key you choose.</p>
       </div>
     </div>
 
@@ -980,7 +981,7 @@ footer b {
       <li>
         <h3>Soli</h3>
         <div>
-          <p>A string machine: twelve top-octave oscillators divided down, a three-phase ensemble across the lot, and the solo voices such machines carried. Paraphonic, like the real ones, so octaves lock.</p>
+          <p>A famous string machine: twelve top-octave oscillators divided down, a three-phase ensemble across the lot, and the solo voices such machines carried. Paraphonic, like the real one, so octaves lock.</p>
           <div class="clips">
             <a class="clip" href="audio/soli-pad.mp3">Pad <span>Full Ensemble</span></a>
             <a class="clip" href="audio/soli-lead.mp3">Lead <span>Violin</span></a>
@@ -993,7 +994,7 @@ footer b {
       <li>
         <h3>June</h3>
         <div>
-          <p>A six-voice polysynth of the early eighties: one oscillator with saw, pulse, sub and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p>
+          <p>A high-fidelity build of a certain six-voice polysynth of the early eighties, you know the one. A single DCO with saw, pulse, sub and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p>
           <div class="clips">
             <a class="clip" href="audio/june-pad.mp3">Pad <span>Strings</span></a>
             <a class="clip" href="audio/june-lead.mp3">Lead <span>Saw Lead</span></a>
@@ -1006,7 +1007,7 @@ footer b {
       <li>
         <h3>Hexa</h3>
         <div>
-          <p>A six-voice wavetable polysynth. Each of its two oscillators reads a table of its own, from eighteen that ship, and two LFOs move through them, together or apart. Over all six voices sits Hex, one control that combines a stereo drift of the voices, an ensemble and a soft phaser. The first stretch of its travel lets the voices wander apart in pitch as the phaser fades in; the middle brings up the ensemble, which thickens the chord and spreads it wide; near the top the tone darkens a little and each note leans in from slightly flat.</p>
+          <p>LarkOS's own six-voice wavetable polysynth. Each of its two oscillators reads a wavetable of its own from eighteen that ship, and two LFOs move through them either together or apart, you decide! Over all six voices sits "Hex," a macro control that combines stereo drift of the voices, an ensemble and a soft phaser. The first stretch of Hex's travel lets the voices wander slightly apart in pitch as the phaser fades in, the middle brings up the ensemble which thickens the chord and spreads it wide. Near the top, the tone darkens a little and each note leans in from slightly flat to give it a juicy, molasses-y feel.</p>
           <div class="clips">
             <a class="clip" href="audio/hexa-pad.mp3">Pad <span>Two Rooms</span></a>
             <a class="clip" href="audio/hexa-lead.mp3">Lead <span>Sync Runner</span></a>
@@ -1019,7 +1020,7 @@ footer b {
       <li>
         <h3>Ham</h3>
         <div>
-          <p>A tonewheel organ: 91 wheels always turning, nine drawbars by footage, single-trigger percussion, scanner vibrato, key click and a preamp. The rotary speaker goes between Brake, Chorale and Tremolo, and each speed can follow the tempo.</p>
+          <p>The legendary tonewheel organ accurately modeled with 91 wheels always turning, nine drawbars by footage, single-trigger percussion, scanner vibrato, key click and a preamp. A rotary speaker goes between Brake, Chorale and Tremolo, and each speed can follow the project tempo.</p>
           <div class="clips">
             <a class="clip" href="audio/ham-jazz.mp3">Jazz <span>Jazz Trio</span></a>
             <a class="clip" href="audio/ham-gospel.mp3">Gospel <span>Gospel Shout</span></a>
@@ -1032,14 +1033,14 @@ footer b {
       <li>
         <h3>Rack</h3>
         <div>
-          <p>A four-tone sample player in the manner of a nineties rack module, with filter and amp envelopes on every tone and two LFOs. Its sounds come from your own JV-880's ROMs.</p>
+          <p>A four-tone sample player in the spirit of Roland's JV-880 rack module, with filter and amp envelopes on every tone and two LFOs. Its sounds come from your own JV-880's ROMs. Note for the legal eagles: LarkOS doesn't supply or direct to ROMs, nor does it contain any Roland code.</p>
         </div>
         <span class="n">200 patches</span>
       </li>
       <li>
-        <h3>Plaits</h3>
+        <h3>Plaits with DX7 patch compatibility</h3>
         <div>
-          <p>Mutable Instruments' Plaits: 24 synthesis engines, eight voices. Its six-operator FM engines read DX7 cartridge banks off the card, four banks of 32, and its wavetable engine takes up to 15 of your own single-cycle waves.</p>
+          <p>Mutable Instruments' Plaits. We know it, we love it: 24 synthesis engines, eight voices. Its six-operator FM engines read DX7 cartridge banks off the card, four banks of 32, and its wavetable engine takes up to 15 of your own single-cycle waves. So bring your own DX7 patches too!</p>
           <div class="clips">
             <a class="clip" href="audio/plaits-va.mp3">Virt Analog</a>
             <a class="clip" href="audio/plaits-fm.mp3">FM <span>2-op</span></a>
@@ -1054,7 +1055,7 @@ footer b {
       <li>
         <h3>Rings</h3>
         <div>
-          <p>Mutable Instruments' Rings resonator, with six models: Modal, Sympathetic, String, FM Voice, Quantized and String+Verb. Four voices of its own inside one slot, stereo out, and a note-off lets it ring: resonators decay, they are not cut.</p>
+          <p>Mutable Instruments' gorgeous Rings resonator, with six models: Modal, Sympathetic, String, FM Voice, Quantized and String+Verb. Four voices with a stereo out path. And note OFF in your track lets the sound ring (ahem), because as the resonators decay they are not cut.</p>
           <div class="clips">
             <a class="clip" href="audio/rings-modal.mp3">Modal</a>
             <a class="clip" href="audio/rings-sympathetic.mp3">Sympathetic</a>
@@ -1067,7 +1068,7 @@ footer b {
         <span class="n">6 models</span>
       </li>
     </ul>
-    <p class="also small">Also on the list, as in CE: CHIP, and Polyend's own six plugins (ACD, DIRT, FAT, PERC, VAP and WTFM), unmodified.</p>
+    <p class="also small">Also in LarkOS, as in CE: Polyend's own synth plugins (ACD, DIRT, FAT, PERC, CHIP, VAP and WTFM), totally unmodified.</p>
   </div>
 </section>
 
@@ -1077,7 +1078,6 @@ footer b {
     <ul class="things">
       <li><b>Undo goes back 39 steps</b> in a pattern, where stock keeps 19.</li>
       <li><b>Jump through long folders.</b> In any file browser, Shift with the arrows or the dial jumps to the next run of names starting with a different character.</li>
-      <li><b>Patch randomization that sounds like something.</b> On Soli, June, Hexa and Ham it draws a playable patch within sensible ranges, not noise.</li>
       <li><b>One loudness for every preset</b> of those four, checked by a test, so changing preset doesn't change the mix.</li>
       <li><b>Effects saved with the project.</b> All twenty-three Beads and Cassette values travel with it.</li>
       <li><b>Beads as its own stem</b> in stem export, beside the delay, the reverb and the master.</li>
@@ -1090,8 +1090,8 @@ footer b {
   <div class="wrap">
     <h2>Rack needs your JV-880</h2>
     <div class="cols">
-      <p class="intro">Rack is a player. It contains no Roland code and no samples: the waves and patches come from the ROMs of a Roland JV-880 you own, converted into ordinary WAV and patch files for the card.</p>
-      <p>You need three files from the instrument: <code>jv880_rom2.bin</code> (256 KB), <code>jv880_waverom1.bin</code> and <code>jv880_waverom2.bin</code> (2 MB each), the same dumps JV-880 emulators use. LarkOS doesn't supply them, and this page won't point you to anywhere that does.</p>
+      <p class="intro">Rack is a player. It contains no Roland code and no samples. The .wavs and patches come from the ROMs of a Roland JV-880 you own, converted into ordinary WAV and patch files for the card.</p>
+      <p>You need three files from the instrument: <code>jv880_rom2.bin</code> (256 KB), <code>jv880_waverom1.bin</code> and <code>jv880_waverom2.bin</code> (2 MB each), the same dumps JV-880 emulators use. LarkOS doesn't supply them, and this page won't point you to anywhere that does. But here's a nifty tool to convert your ROMs!</p>
     </div>
 
     <div class="screen" id="rackconv">
@@ -1123,7 +1123,7 @@ footer b {
       <div>
         <div class="note" id="download">
           <h3>Downloads are not open yet</h3>
-          <p>The first build is being played on a real Tracker Mini before anyone else flashes it. When it's ready, the firmware and the card files appear on <a href="https://github.com/lark-tracker/lark-os/releases">GitHub Releases</a>, free.</p>
+          <p>The first build is being tested on a real Tracker Mini Anniverary Edition before anyone else flashes it on their Mini (or Mini AE). When it's ready, the firmware and the card files will appear on <a href="https://github.com/lark-tracker/lark-os/releases">GitHub Releases</a>, always free. I don't intend on developing for Tracker or Tracker+, so this may or may not work for those devices - no guarantees, no support, flash it at your own risk, etc.</p>
         </div>
         <ol class="seq">
           <li><p><b>Back up the card's Projects folder.</b> CE saves patterns in a newer format that firmware older than CE can't read.</p></li>
