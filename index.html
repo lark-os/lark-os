@@ -1139,7 +1139,8 @@ footer b {
       </div>
       <div>
         <h3>If it won't start</h3>
-        <p>Put a known-good .ptf in <code>/Firmware</code>, ideally the only one there, and insert the card. Press the recessed reset button next to the USB-C port with a paperclip: the bootloader picks up the file and flashes it. The bootloader sits apart from the firmware, so this works however badly a build behaves.</p>
+        <p>Put a known-good .ptf in <code>/Firmware</code>, ideally the only one there, and insert the card. Press the recessed reset button next to the USB-C port with a paperclip: the bootloader picks up the file and flashes it. The bootloader sits apart from the firmware, so this works however badly a build behaves.
+        <br><br> Note: Pick any release you want after the 11/23/2026 beta because the synth plugin system arrived in the beta branch on November 12th and any release before that won't run LarkOS's original synth plugins.</p>
         <h3 style="margin-top:22px">Going back to stock</h3>
         <p>Flash the stock file the same way you flashed LarkOS. Projects open on both, and the effect settings file is simply ignored by firmware that doesn't know it. Chords that use LarkOS's extra chord entries won't play as written on stock.</p>
       </div>
