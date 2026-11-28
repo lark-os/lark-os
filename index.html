@@ -880,7 +880,7 @@ footer b {
     <canvas id="boot" width="800" height="480" role="img" aria-label="The LarkOS boot animation: a pixel lark takes off from the end of the loading wave, flies over the word LarkOS, lands on the L and sings while the wave fills."></canvas>
     <button id="replay" class="ghost" type="button" hidden>Play it again</button>
   </div>
-  <p class="lead">LarkOS is free community firmware for the Polyend Tracker Mini. It puts your project's key under every note, adds a live granular send that listens to the input and a tape machine to the master bus. It brings nine exciting new synth plugins including a weird and wonderful dual wavetable synth, a classic rompler player, a fully synthesized 808 and 909 kit, and deeply-accurate physically modeled instruments.
+  <p class="lead">LarkOS is free community firmware for the Polyend Tracker Mini. It puts your project's key under every note, adds a live granular send that listens to the input and a tape machine to the master bus. Enjoy nine exciting new synth plugins including a weird and wonderful dual wavetable synth, a classic rompler player, a fully synthesized 808 and 909 kit, and accurate physically modeled instruments.
   <br> 
   <br>
   It is currently in closed beta testing and is scheduled to be released mid-December. A YouTube video introduction to follow in the coming weeks.</a>
@@ -913,7 +913,7 @@ footer b {
 
     <div class="stored">
       <h3>A chord is one step on one track</h3>
-      <p>A chord lives as FX data on a single step, not spread across tracks. The note column holds the chord's lowest note, and the chord FX beside it holds a number that picks an entry from the firmware's chord table. Each entry is the list of notes to sound above that lowest note, so inversions and voicings are simply different entries, such as "root 5 above the bass".</p>
+      <p>A chord lives as FX data on a single step, not spread across tracks. LarkOS shows you the name of each chord, not some random table value that means nothing musically. The note column holds the chord's lowest note, and the chord FX beside it holds a number that picks an entry from the firmware's chord library. Each entry is the list of notes to sound above that lowest note, so inversions and voicings are simply different entries, such as "root 5 above the bass".</p>
       <p>When the pattern plays:</p>
       <ul>
         <li>On a synth or MIDI instrument, that one track plays the whole chord.</li>
@@ -924,13 +924,13 @@ footer b {
     </div>
 
     <div class="cols">
-      <div><h3>Notes that stay in the key</h3><p>Where this all started: with a scale chosen, +1 and −1 move a note along the scale. In C major, C goes to D, E and F, never C#. A chord moves to the chord on the next degree, and +10 and −10 are still an octave. Notes from a MIDI keyboard (including the KB-1!) snap to the key. A Chromatic project, a track set to Drums, and empty steps work exactly as stock.</p></div>
+      <div><h3>Notes that stay in the key</h3><p>Where this all started: with a scale chosen, +1 and −1 move a note along the scale. In C major, C goes to D, E and F, never C#. A chord moves to the chord on the next degree, and +10 and −10 are still an octave. Notes from a MIDI keyboard (including the KB-1!) snap to the key. A Chromatic project, a track set to Drums, and empty steps work exactly as stock. </p></div>
       <div><h3>Seven chords on seven buttons</h3><p>The Chords page holds the key's seven chords, each showing its numeral and its name. Press one and it is written at the cursor, press it again for its next color: Dm7, Dm9, Dm11, Dm13, Dm. A color is fitted to the degree it lands on, so on iii, where a ninth would leave the key, Em7 goes straight on to its eleventh.</p></div>
       <div><h3>Colors and voicings on the value keys</h3><p>Put the cursor on a chord's FX value in edit mode. +1 and −1 walk its colors, up through add9, 6, 6/9, 7th, 9th, 11th and 13th and down to the triad and the suspensions. +10 and −10 step through close voicings, the inversions, shell and open voicings. You hear each one as a preview and the title bar names it: Chord: Dm9/F 1st inv.</p></div>
       <div><h3>Double-press Shift and LarkOS chooses</h3><p>It looks 32 steps either way along the track: at the chords before and after (what they share, how rich they are, whether this one resolves into the next, how far the hand moves) and at the single notes nearby, which the chord should contain and not rub against. Double-press again for the runner-up, and again for a third. With a selection, it does every chord inside.</p></div>
       <div><h3>Play chords in from a keyboard</h3><p>With one step selected, hold three or more keys on a MIDI keyboard. They are written as that one step, showing the lowest note while the chord FX registers what you played, inversion included. Stock CE sounded the extra notes but wrote only the first. Two keys a fourth or a fifth apart count as a chord too!</p></div>
       <div><h3>Chord tools and per-pattern Key</h3><p>"Set" swaps the seven buttons between the key's own chords, chords borrowed from the parallel key. "Function" chooses between: five secondary dominants, the tritone substitute and the sharp-four diminished. "Voicing" chooses close, shell or open. "Bass" chooses the least movement, the root, third or fifth, or a pedal on the key note. "Transp" moves chords by step. "Pin Key" gives one pattern a key of its own, making things like modal interchange and pivots to parallel major/minor a breeze! </p></div>
-      <div><h3>Chords on samples</h3><p>A sample track has one voice, but the sample instrument has eight. A chord on a sample instrument borrows voices from tracks with nothing to play, empty tracks first. With three tracks free a seventh chord is complete, with fewer it keeps the third and seventh and drops the fifth first. A lent voice goes back the moment its own track plays.</p></div>
+      <div><h3>Chords are just as easy on samples!</h3><p>A sample track has one voice, but the sample instrument has eight. A chord on a sample instrument borrows voices from tracks with nothing to play, empty tracks first. With three tracks free a seventh chord is complete, with fewer it keeps the third and seventh and drops the fifth first. A lent voice goes back the moment its own track plays.</p></div>
     </div>
   </div>
 </section>
@@ -943,7 +943,7 @@ footer b {
       <div>
         <h3>Beads</h3>
         <p>Beads chops what you feed it into grains and scatters them...including whatever you send through the audio in jack, turning your Tracker Mini into a live granular pedal! Beads sits beside the delay and the reverb as a fourth send, so the drums can have a tail while the bass stays dry. Raise a track's Beads send, or write step FX Z to set it from that step on.</p>
-        <p>Time, Size, Shape and Pitch each have a random spread; then come Density, Feedback, Reverb, a choice of four Media, and the Send volume. Pitch moves in fourths, fifths and octaves, and its random spread sends each grain to one of them, never in between. Freeze stops writing to the buffer: mute everything underneath and the cloud carries on alone. Beads also renders as its own stem into your DAW.</p>
+        <p>Time, Size, Shape and Pitch each have a random spread. Next in the chain is Density, Feedback, Reverb, a choice of four Media, and the Send volume. Pitch moves in fourths, fifths and octaves, and its random spread sends each grain to one of them, never in between. Freeze stops writing to the buffer: mute everything underneath and the cloud carries on alone. Beads also renders as its own stem into your DAW.</p>
         <figure class="demo" style="--in:32.8%">
           <a class="clip wide" href="audio/fx-beads.mp3">Beads <span>two bars dry, then the send goes up</span><i aria-hidden="true"></i></a>
           <figcaption>Rings' "Sympathetic" model on its own for two bars. At the pink tick, the track's Beads send goes to 100 and the grains gather within a second. When the arpeggio stops, the strings and the cloud ring on into the fade. Size 85, Density 95, Feedback 60, Reverb 60, Time 35, and Pitch random 50 so the grains land on fourths, fifths and octaves; the rest at their defaults.</figcaption>
@@ -981,7 +981,7 @@ footer b {
     <li>
         <h3>Soli</h3>
         <div>
-          <p>A physically modeled violin, a viola, a cello or a double bass, bowed or plucked. Each note is a string under a bow whose grip and slip are worked out note by note. Using a friction curve fitted to measurements of rosined bows (the method from McIntyre, Schumacher and Woodhouse's 1983 paper and Julius Smith's 1986 one)<sup><a href="#fn-soli">1</a></sup>, a fitting tool compared each harmonic of every note across of each instrument's range in free recordings against the same harmonic from the model, with the strings' ring times taken from the pizzicato recordings. On a track, a note that follows another without a gap is slurred (the finger moving while the bow keeps going). You set the bow's pressure and its place between fingerboard and bridge, the vibrato, the mute, and bowed or pizzicato from one step to the next. Put Soli on three tracks to play a trio!</p>
+          <p>A physically modeled violin, viola, cello or a double bass, bowed or plucked. Each note is a string under a bow whose grip and slip are calculated note by note. Using a friction curve calibrated to measurements of rosined bows (the method from McIntyre, Schumacher and Woodhouse's 1983 paper and Julius Smith's 1986 one)<sup><a href="#fn-soli">1</a></sup>, a fitting tool compared each harmonic of every note across of each instrument's range in free recordings against the same harmonic from the model, with the strings' ring times taken from the pizzicato recordings. On a track, a note that follows another without a gap is slurred (the finger moving while the bow keeps going). You set the bow's pressure and its place between fingerboard and bridge, the vibrato, the mute, and bowed or pizzicato from one step to the next. Invite Soli to three tracks and conduct a trio!</p>
           <div class="clips">
             <a class="clip" href="audio/soli-violin.mp3">Violin <span>Violin</span></a>
             <a class="clip" href="audio/soli-viola.mp3">Viola <span>Viola</span></a>
@@ -995,7 +995,7 @@ footer b {
       <li>
         <h3>June</h3>
         <div>
-          <p>A high-fidelity build of a certain six-voice polysynth of the early eighties, you know the one. A single DCO with saw, pulse, sub and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p>
+          <p>A high-fidelity build of a certain six-voice polysynth of the early eighties, you know the one. A single DCO with saw, pulse, sub oscillator and noise mixed, a high-pass ahead of a four-pole ladder, one envelope, and a two-line chorus at three speeds.</p>
           <div class="clips">
             <a class="clip" href="audio/june-pad.mp3">Pad <span>Strings</span></a>
             <a class="clip" href="audio/june-lead.mp3">Lead <span>Saw Lead</span></a>
@@ -1008,7 +1008,7 @@ footer b {
       <li>
         <h3>Hexa</h3>
         <div>
-          <p>LarkOS's own six-voice wavetable polysynth. Each of its two oscillators reads a wavetable of its own from eighteen that ship, and two LFOs move through them either together or apart, you decide! Over all six voices sits "Hex," a macro control that combines stereo drift of the voices, an ensemble and a soft phaser. The first stretch of Hex's travel lets the voices wander slightly apart in pitch as the phaser fades in, the middle brings up the ensemble which thickens the chord and spreads it wide. Near the top, the tone darkens a little and each note leans in from slightly flat to give it a juicy, molasses-y feel.</p>
+          <p>LarkOS's signature six-voice wavetable polysynth. Each of the two oscillators reads a wavetable of its own from eighteen that ship, and two LFOs move through them either together or apart, you decide! Over all six voices sits "Hex," a weird macro control that combines stereo drift of the voices, an ensemble and a soft phaser. The first stretch of Hex's travel lets the voices wander slightly apart in pitch as the phaser fades in, the middle brings up the ensemble which thickens the chord and spreads it wide. Near the top, the tone darkens a little and each note leans in from slightly flat to give it a juicy, molasses-y feel.</p>
           <div class="clips">
             <a class="clip" href="audio/hexa-pad.mp3">Pad <span>Two Rooms</span></a>
             <a class="clip" href="audio/hexa-lead.mp3">Lead <span>Sync Runner</span></a>
@@ -1034,7 +1034,7 @@ footer b {
       <li>
         <h3>Road</h3>
         <div>
-          <p>A tine electric suitcase piano, physically modelled rather than sampled, that can ring notes out over each other in a single track. Each note is a hammer, a ringing steel tine and a magnetic pickup, worked out as it plays with your Velocity (V) values: struck softly (low V) it rings like a bell, struck hard (high V) the pickup makes it bark, and the bark fades before the tone does. Behind the keys are the suitcase's preamp with bass, mid and treble, its two-lamp stereo vibrato and its speakers. Each key's decay and overtones were measured from a 1977 stage piano, 65 notes at five velocities, recorded straight from the pickups. Then the model was built on Falaize and Hélie's physics while a fitting script rendered every recorded note at every velocity and searched, key by key, for the tine swing and pickup position whose harmonics best matched the recordings.<sup><a href="#fn-road">2</a></sup></p>
+          <p>A deep physical model of a tine electric suitcase piano which has a trick up its sleeve: it can ring notes out over each other in a single track! Each note is a hammer, a ringing steel tine and a magnetic pickup, worked out as it reads your Velocity (V) values: struck softly (low V) it rings like a bell, struck hard (high V) the pickup makes it bark, and the bark fades before the tone does. Behind the keys are the suitcase's preamp with bass, mid and treble, its two-lamp stereo vibrato and its speakers. Each key's decay and overtones were measured from a 1977 stage piano, 65 notes at five velocities, recorded straight from the pickups. Then the model was built on Falaize and Hélie's physics while a fitting script rendered every recorded note at every velocity and searched, key by key, for the tine swing and pickup position whose harmonics best matched the recordings.<sup><a href="#fn-road">2</a></sup></p>
           <div class="clips">
             <a class="clip" href="audio/road-neo.mp3">Neo soul <span>Neo Soul</span></a>
             <a class="clip" href="audio/road-suitcase.mp3">Chords <span>Suitcase</span></a>
